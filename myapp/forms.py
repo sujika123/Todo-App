@@ -8,8 +8,6 @@ from myapp.models import Login, userlogin, eventadd
 class DateInput(forms.DateInput):
     input_type="date"
 
-# class DateInput(forms.DateInput):
-#     input_type = 'date'
 
 class LoginForm(UserCreationForm):
     username=forms.CharField()
