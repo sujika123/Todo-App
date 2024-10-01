@@ -62,7 +62,7 @@ def profileupdate(request,id):
     profile = userlogin.objects.get(id=id)
     form1 = userloginform(instance=profile)
     if request.method == 'POST':
-        form = LoginForm(request.POST or None,instance=profile or None)
+        # form = LoginForm(request.POST or None,instance=profile or None)
         # form1 = userloginform(request.POST or None,request.FILES,instance=profile or None)
         form1 = userloginform(request.POST or None,request.FILES,instance=profile or None)
         if form1.is_valid():
@@ -94,12 +94,12 @@ def viewevent(request):
 
 def eventupdate(request,id):
 
-    viewevent = eventadd.objects.get(id=id)
-    form = eventaddform(instance=viewevent)
+    data = eventadd.objects.get(id=id)
+    form = eventaddform(instance=data)
     if request.method == 'POST':
-        form = eventaddform(request.POST or None,request.FILES or None,instance=viewevent or None)
-        if form.is_valid():
-            event=form.save(commit=True)
+        form1 = eventaddform(request.POST or None,request.FILES or None,instance=data or None)
+        if form1.is_valid():
+            event=form1.save(commit=True)
             event.save()
             return redirect('viewevent')
 

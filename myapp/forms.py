@@ -24,7 +24,6 @@ class userloginform(forms.ModelForm):
 
 class eventaddform(forms.ModelForm):
     date = forms.DateField(widget=DateInput)
-    # date=forms.DateField(widget=DateInput)
     class Meta:
         model=eventadd
         fields=('name','date','description','image')
