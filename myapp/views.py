@@ -18,7 +18,7 @@ def userhome(request):
     return render(request,'userpages/userhome.html')
 
 def log(request):
-    if request.method=='POST':
+    if request.method =='POST':
         username = request.POST.get('uname')
         password = request.POST.get('pass')
         user  = authenticate(request,username=username,password=password)
@@ -35,17 +35,17 @@ def log(request):
     return render(request,'login.html')
 
 def register(request):
-    form=LoginForm()
-    form1=userloginform()
-    if request.method=='POST':
-        form=LoginForm(request.POST)
-        form1=userloginform(request.POST,request.FILES)
+    form = LoginForm()
+    form1 = userloginform()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        form1 = userloginform(request.POST,request.FILES)
         if form.is_valid() and form1.is_valid():
-            user=form.save(commit=False)
-            user.is_user=True
-            user.save()
-            c=form1.save(commit=False)
-            c.user=user
+            us = form.save(commit=False)
+            us.is_user = True
+            us.save()
+            c = form1.save(commit=False)
+            c.user = us
             c.save()
             return redirect(log)
     return render(request,'registration.html',{'form':form,'form1':form1})
@@ -73,16 +73,17 @@ def profileupdate(request,id):
 
     return render(request,'userpages/profileupdate.html',{'form1':form1})
 
+
 # User Event
 
 def addevent(request):
     form = eventaddform()
     u = request.user
-    if request.method=='POST':
+    if request.method == 'POST':
         form = eventaddform(request.POST,request.FILES)
         if form.is_valid():
-            obj=form.save(commit=False)
-            obj.user=u
+            obj = form.save(commit=False)
+            obj.user = u
             obj.save()
         return redirect('viewevent')
     return render(request,'userpages/addevent.html',{'form':form})
@@ -99,13 +100,13 @@ def eventupdate(request,id):
     if request.method == 'POST':
         form1 = eventaddform(request.POST or None,request.FILES or None,instance=data or None)
         if form1.is_valid():
-            event=form1.save(commit=True)
+            event = form1.save(commit=True)
             event.save()
             return redirect('viewevent')
 
     return render(request, 'userpages/eventupdate.html', {'form': form})
 
 def eventdelete(request,id):
-    data=eventadd.objects.get(id=id)
+    data = eventadd.objects.get(id=id)
     data.delete()
     return redirect('viewevent')

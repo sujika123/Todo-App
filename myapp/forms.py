@@ -6,24 +6,24 @@ from myapp.models import Login, userlogin, eventadd
 
 
 class DateInput(forms.DateInput):
-    input_type="date"
+    input_type = "date"
 
 
 class LoginForm(UserCreationForm):
-    username=forms.CharField()
-    password1=forms.CharField(widget=forms.PasswordInput,label='password')
-    password2= forms.CharField(widget=forms.PasswordInput, label='confirm password')
+    username = forms.CharField()
+    password1 = forms.CharField(widget=forms.PasswordInput,label='password')
+    password2 = forms.CharField(widget=forms.PasswordInput, label='confirm password')
     class Meta:
-        model=Login
-        fields=('username','password1','password2',)
+        model = Login
+        fields = ('username','password1','password2',)
 
 class userloginform(forms.ModelForm):
     class Meta:
-        model=userlogin
-        fields=('name','age','address','image')
+        model = userlogin
+        fields = ('name','age','address','image')
 
 class eventaddform(forms.ModelForm):
     date = forms.DateField(widget=DateInput)
     class Meta:
-        model=eventadd
-        fields=('name','date','description','image')
+        model = eventadd
+        fields = ('name','date','description','image')
